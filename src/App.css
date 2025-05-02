@@ -1,0 +1,52 @@
+
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.Cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    width : 95%;
+    margin: 0 auto;
+}
+
+.card{
+    border: 2px solid #fff;
+    background-color: rgba(255, 192, 203, 0.685);
+    width: max(130px, 15vw);
+    height: max(130px, 15vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s ease;
+}
+
+
+.card:hover{
+    transform: scale(1.1);
+}
+
+
+.card img{
+    width: 80%;
+    height: 80%;
+}
+
+
+.title{
+    text-align: center;
+    margin-bottom: 3em;
+    padding: 1em;
+}
+
+.title p{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
