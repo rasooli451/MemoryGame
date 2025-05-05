@@ -3,7 +3,6 @@
 import Card from "./Card"
 
 export default function Cards({cards, clicked}){
-    console.log(cards);
     function Passup(alreadyclicked, key){
         clicked(alreadyclicked, key);
     }
