@@ -21,19 +21,28 @@ export default function App() {
 
   useEffect(()=>{
      if (cards.length == 0){
-      let url = "https://pokeapi.co/api/v2/pokemon/";
-      for (let i = 1; i <= 12; i++){
-         fetch(url + i + "/").
-         then(function(response){
+      async function getCards(){
+        let url = "https://pokeapi.co/api/v2/pokemon/";
+        for (let i = 1; i <= 12; i++){
+           console.log(i);
+           await fetch(url + i + "/").
+           then(function(response){
               return response.json()
-         }).then(function(response){
-        initialList[i - 1] = response.sprites.other["official-artwork"].front_default + "," + response.name;
-        setCards(initialList);
+           }).then(function(response){
+               initialList[i - 1] = {sprite : response.sprites.other["official-artwork"].front_default,name:response.name,clicked : false, key : crypto.randomUUID()};        
      })
+            if (i == 12){
+               setCards(initialList);
+            }
+      }
      }
+     getCards();
     }
     else{
-      let shuffled = [];
+      if (score > highScore){
+        setHighScore(score);
+      }
+     let shuffled = [];
      let helper = [0,0,0,0,0,0,0,0,0,0,0,0];
      for (let i = 0; i < 12; i++){
          let random = Math.floor(Math.random() * 12);
@@ -42,23 +51,40 @@ export default function App() {
          }
         helper[random] = 1;
         shuffled.push(cards[random]);
+        if (score == 0){
+         if (cards[random].clicked){
+            shuffled[shuffled.length - 1].clicked = false;
+         }
+        }
      }
      setCards(shuffled);
     }
   }, [score]);
 
-  function handleScore(){
-    setScore(score + 1);
-  }
 
-  function handleInput(){
+  function handleInput(clickedbefore, key){
+        if (clickedbefore){
+           setScore(0);
+        }
+        else{
+          setCards((prev) => prev.map((item) =>{
+             if (item.key == key){
+                item.clicked = true;
+               return item;
+             }
+             else{
+               return item;
+             }
+          }))
+          setScore(score + 1);
+        }
 
   }
   return (<>
         <Title score={score} highScore={highScore}/>
-        {cards.length > 0 ? <Cards cards={cards} clicked={handleInput}/>  
+        {cards.length > 0 ? <Cards cards={cards} clicked={handleInput} where={"cards"}/>  
          
-        : <Cards cards={initialList} clicked={handleInput}/>}
+        : <Cards cards={initialList} clicked={(clicked, key)=> handleInput(clicked, key) } where={"initialList"}/>}
     </>
   )
 }
