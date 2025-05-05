@@ -13,4 +13,4 @@ If you are developing a production application, we recommend using TypeScript wi
 
 
 
-A simple but fun memory game made using react, visit at : 
+A simple but fun memory game made using react, visit at : https://memory-game-sigma-roan.vercel.app/
