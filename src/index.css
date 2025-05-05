@@ -65,8 +65,3 @@ button:focus-visible {
 
 
 
-@media (max-width : 1030px) {
-  body{
-    height: 100%;
-  }
-}
