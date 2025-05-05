@@ -12,7 +12,7 @@
 .Cards{
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    justify-content: space-around;
     width : 95%;
     margin: 0 auto;
 }
@@ -20,8 +20,9 @@
 .card{
     border: 2px solid #fff;
     background-color: rgba(255, 192, 203, 0.685);
-    width: max(130px, 15vw);
-    height: max(130px, 15vw);
+    width: max(130px, 14vw);
+    height: max(130px, 14vw);
+    margin: 10px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,6 +32,7 @@
 
 .card:hover{
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 
